@@ -10,9 +10,6 @@
 
 //YwcyFvu72-I7P-5ja7PKWsvsuTSnkFtRjFvFgReeDwc
 
-
-const applicationServerPublicKey = 'BB8iTwD7mwzJvrvKVqDX1RZuAqLcfvd8JN0KP-nGDWruFIY0FD1y_pO3celc7vQfri-PjRbyFHEoYJMIIWdnhNo';
-
 const pushButton = document.querySelector('.js-push-btn');
 
 let isSubscribed = false;
@@ -96,6 +93,7 @@ function updateBtn() {
 }
 
 function subscribeUser() {
+  applicationServerPublicKey = document.getElementById("key").value;
   const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
   swRegistration.pushManager.subscribe({
     userVisibleOnly: true,
