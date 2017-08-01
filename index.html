@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Notifications</title>
+<script>
+// request permission on page load
+document.addEventListener('DOMContentLoaded', function () {
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+});
+
+function notifyMe() {
+  if (!Notification) {
+    alert('Permission required'); 
+    return;
+  }
+	
+  if (Notification.permission !== "granted")
+    Notification.requestPermission();
+  else {
+    var text = document.getElementById('mytext').value;
+    var notification = new Notification('Notification title', {
+      icon: 'http://www.glode.com/img/logo_m.gif',
+      body: text,
+    });
+
+    notification.onclick = function () {
+      window.open("https://www.glode.co.jp/");      
+    };    
+  }
+}
+</script>
+</head>
+<body>
+
+<input id="mytext" type="text">
+<button onclick="notifyMe()">
+  notify
+</button>
+
+</body>
+</html>
