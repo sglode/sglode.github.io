@@ -18,6 +18,6 @@ self.addEventListener('notificationclick', function(event) {
   event.notification.close();
 
   event.waitUntil(
-    clients.openWindow('https://glode.co.jp')
+    clients.openWindow('https://www.glode.co.jp')
   );
 });
