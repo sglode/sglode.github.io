@@ -5,8 +5,8 @@ self.addEventListener('push', function(event) {
   const title = 'グローバルデザイン';
   const options = {
     body: 'Webサイトの構築、運用',
-    icon: 'http://www.glode.com/img/logo_m.gif',
-    badge: 'http://www.glode.com/img/logo_m.gif'
+    icon: 'img/logo_m.gif',
+    badge: 'img/logo_m.gif'
   };
 
   event.waitUntil(self.registration.showNotification(title, options));
