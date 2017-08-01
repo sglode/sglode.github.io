@@ -18,8 +18,8 @@ function saveDetails(details) {
 }
 
 function sendPushMessage() {
-  const subscriptionTextArea = document.querySelector('#push-subscription');
-  const textToSendTextArea = document.querySelector('#push-data');
+  const subscriptionTextArea = document.getElementById('push-subscription');
+  const textToSendTextArea = document.getElementById('push-data');
 
   const subscriptionString = subscriptionTextArea.value.trim();
   const dataString = textToSendTextArea.value;
@@ -51,8 +51,8 @@ function sendPushMessage() {
     );
   }
 
-  const publicElement = document.querySelector('.js-public-key');
-  const privateElement = document.querySelector('.js-private-key');
+  // const publicElement = document.getElementById('.js-public-key');
+ // const privateElement = document.getElementById('.js-private-key');
 
   return fetch('/api/send-push-msg', {
     method: 'POST',
@@ -63,8 +63,8 @@ function sendPushMessage() {
       subscription: subscriptionObject,
       data: dataString,
       applicationKeys: {
-        public: publicElement.textContent,
-        private: privateElement.textContent,
+        public: "BB8iTwD7mwzJvrvKVqDX1RZuAqLcfvd8JN0KP-nGDWruFIY0FD1y_pO3celc7vQfri-PjRbyFHEoYJMIIWdnhNo",
+        private: "YwcyFvu72-I7P-5ja7PKWsvsuTSnkFtRjFvFgReeDwc"
       }
     })
   })
@@ -79,7 +79,7 @@ function sendPushMessage() {
 }
 
 function initialiseUI() {
-  const sendBtn = document.querySelector('.js-send-push');
+  const sendBtn = document.getElementById('js-send-push');
   sendBtn.addEventListener('click', () => {
     sendBtn.disabled = true;
 
@@ -95,8 +95,8 @@ function initialiseUI() {
 
   const previousDetails = getDetails();
   if (previousDetails) {
-    const subscriptionTextArea = document.querySelector('#push-subscription');
-    const textToSendTextArea = document.querySelector('#push-data');
+    const subscriptionTextArea = document.getElementById('push-subscription');
+    const textToSendTextArea = document.getElementById('push-data');
 
     subscriptionTextArea.value = previousDetails.subscription;
     textToSendTextArea.value = previousDetails.data;
