@@ -1,28 +1,13 @@
-self.addEventListener('install', function(event) {
-  console.log("Service Worker installed");
-  event.waitUntil(self.skipWaiting());
-});
+self.addEventListener('push', function(event) {
+  console.log('[Service Worker] Push Received.');
+  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
 
-self.addEventListener('activate', function(event) {
-  console.log("Service Worker activated");
-  event.waitUntil(self.skipWaiting());
-});
+  const title = 'Push Codelab';
+  const options = {
+    body: 'Yay it works.',
+    icon: 'images/icon.png',
+    badge: 'images/badge.png'
+  };
 
-self.addEventListener('message', function(event) {
-  console.log("Service Worker message event: " + JSON.stringify(event.data));
-  var sender = ( event.ports && event.ports[0] ) || event.source;
-  switch (event.data) {
-    case 'fetchNotifications': {
-      // send notifications when client is ready
-      sender.postMessage("Here are your queued notifications!");
-		   }
-    // case 'command': // handle some command, respond
-    default: {
-      if(sender)
-        sender.postMessage("Unknown command: " + event.data);
-      break;
-    }
-  }
+  event.waitUntil(self.registration.showNotification(title, options));
 });
-
-console.log("Service Worker initialized");
