@@ -4,7 +4,7 @@ self.addEventListener('push', function(event) {
 
   const title = 'グローバルデザイン';
   const options = {
-    body: "${event.data.text()}",
+    body: ${event.data.text()},
     icon: 'img/logo_m.gif',
     badge: 'img/logo_m.gif'
   };
