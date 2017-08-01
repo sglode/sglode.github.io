@@ -15,6 +15,31 @@ self.addEventListener('message', function(event) {
     case 'fetchNotifications': {
       // send notifications when client is ready
       sender.postMessage("Here are your queued notifications!");
+		 document.addEventListener('DOMContentLoaded', function () {
+		  if (Notification.permission !== "granted")
+		    Notification.requestPermission();
+		});
+
+		function notifyMe() {
+		  if (!Notification) {
+		    alert('Permission required'); 
+		    return;
+		  }
+			
+		  if (Notification.permission !== "granted")
+		    Notification.requestPermission();
+		  else {
+		    var text = document.getElementById('mytext').value;
+		    var notification = new Notification('Notification title', {
+		      icon: 'http://www.glode.com/img/logo_m.gif',
+		      body: text,
+		    });
+
+		    notification.onclick = function () {
+		      window.open("https://www.glode.co.jp/");      
+		    };    
+		  }
+		}
       break;
     }
     // case 'command': // handle some command, respond
@@ -27,9 +52,3 @@ self.addEventListener('message', function(event) {
 });
 
 console.log("Service Worker initialized");
-
-setInterval(function() {
-  // request to your API
-  // create notification
-  // queue to send to client
-}, 60*1000);
