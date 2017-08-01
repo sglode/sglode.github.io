@@ -93,7 +93,7 @@ function updateBtn() {
 }
 
 function subscribeUser() {
-  applicationServerPublicKey = document.getElementById("key").value;
+  var applicationServerPublicKey = document.getElementById("key").value;
   const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
   swRegistration.pushManager.subscribe({
     userVisibleOnly: true,
