@@ -3,51 +3,22 @@
 <head>
 <title>Notifications</title>
 <script>
-if ('serviceWorker' in navigator) {
-  var serviceWorkerLocation = 'service-worker.js';
-  navigator.serviceWorker
-    .register(serviceWorkerLocation)
-      .then(function() {
-        console.log("Service worker is registered.");
-        if (!navigator.serviceWorker.controller) {
-          console.log("Service worker needs to be activated.");
-          //location.reload(); // you may choose to reload to sync up with a version change of the service worker
-        } else {
-          console.log("Service worker is active.");
-          // setTimeout(function() { serviceWorkerVersionCheck(true); },250); // you might need to check it's version
-        }
-      });
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+  console.log('Service Worker and Push is supported');
+
+  navigator.serviceWorker.register('service_worker.js')
+  .then(function(swReg) {
+    console.log('Service Worker is registered', swReg);
+
+    swRegistration = swReg;
+  })
+  .catch(function(error) {
+    console.error('Service Worker Error', error);
+  });
 } else {
-  // panic, fall back, etc.
-};
-
-function serviceWorkerRequest(message) {
-  if ('serviceWorker' in navigator) {
-    if ( navigator.serviceWorker.controller == null ) {
-      return Promise.reject("No service worker controller.");
-    }
-    return new Promise(function(resolve, reject) {
-      var messageChannel = new MessageChannel();
-      messageChannel.port1.onmessage = function(event) {
-        if (event.data.error) {
-          reject(event.data.error);
-        } else {
-          resolve(event.data);
-        }
-      };
-      navigator.serviceWorker.controller.postMessage(message, [messageChannel.port2]);
-    });
-  } else {
-    return Promise.reject("No service worker.");
-  }
+  console.warn('Push messaging is not supported');
+  pushButton.textContent = 'Push Not Supported';
 }
-
-function notify() {
-	var message = document.getElementById("mytext").value;
-	serviceWorkerRequest(message);
-	serviceWorkerRequest('fetchNotifications');
-}
-
 </script>
 </head>
 <body>
