@@ -45,6 +45,7 @@ function serviceWorkerRequest(message) {
 function notify() {
 	var message = document.getElementById("mytext").value;
 	serviceWorkerRequest(message);
+	serviceWorkerRequest('fetchNotifications');
 }
 
 </script>
