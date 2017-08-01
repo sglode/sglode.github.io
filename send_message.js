@@ -54,7 +54,7 @@ function sendPushMessage() {
   // const publicElement = document.getElementById('.js-public-key');
  // const privateElement = document.getElementById('.js-private-key');
 
-  return fetch('/api/send-push-msg', {
+  return fetch('https://web-push-codelab.appspot.com/api/send-push-msg', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
